@@ -1,0 +1,63 @@
+name: palworld
+services:
+  palworld-dedicated-server:
+    #build: .
+    container_name: palworld-dedicated-server
+    image: jammsen/palworld-dedicated-server:latest
+    restart: always
+    network_mode: bridge
+    ports:
+      - target: 8211 # gamerserver port inside of the container
+        published: 8211 # gamerserver port on your host
+        protocol: udp
+        mode: host
+      - target: 25575 # rcon port inside of the container
+        published: 25575 # rcon port on your host
+        protocol: tcp
+        mode: host
+    environment:
+      - ALWAYS_UPDATE_ON_START=true
+      - MAX_PLAYERS=32
+      - MULTITHREAD_ENABLED=true
+      - COMMUNITY_SERVER=true
+      - RCON_ENABLED=true
+      - RCON_PORT=25575
+      - PUBLIC_IP=0.0.0.0
+      - PUBLIC_PORT=8211
+      - SERVER_NAME=jammsen-docker-generated-###RANDOM###
+      - SERVER_DESCRIPTION=Palworld-Dedicated-Server running in Docker by jammsen
+      - SERVER_PASSWORD=casaos
+      - ADMIN_PASSWORD=casaos
+      - BACKUP_ENABLED=true
+      - BACKUP_CRON_EXPRESSION=0 * * * *
+    volumes:
+      - type: bind
+        source: /DATA/AppData/palworld/game
+        target: /palworld
+  rcon:
+    image: outdead/rcon:latest
+    entrypoint: ['/rcon', '-a', '0.0.0.0:25575', '-p', 'casaos']
+    profiles: ['rcon']    
+x-casaos:
+  architectures:
+    - amd64
+  main: palworld-dedicated-server
+  author: Coloynle
+  category: Game
+  description:
+    en_us: 幻兽帕鲁
+    zh_cn: 幻兽帕鲁
+  developer: usememos Team
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Palworld/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Palworld/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Palworld/screenshot-2.png
+  tagline:
+    en_us: Memos is a lightweight, self-hosted memo hub. Open Source and Free forever.
+    zh_cn: Memos 是一个轻量级的自托管Memos中心。 开源且永远免费。
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Palworld/thumbnail.png
+  tips: {}
+  title:
+    en_us: Palworld Server
+    zh_cn: 幻兽帕鲁服务端
+  port_map: "25575"

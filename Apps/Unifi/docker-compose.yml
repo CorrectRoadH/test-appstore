@@ -92,6 +92,7 @@ x-casaos:
   author: "Giuseppe Galilei"
   developer: "Ubiquiti and Linuxserver.io"
   category: Network
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-network-application/icon.png
   description:
     en_us: |
         Only mandatory ports are enabled by default, to extend functionality consider exposing 1900:1900/udp, 8843:8843, 8880:8880, 6789:6789, 5514:5514/udp.
@@ -111,7 +112,6 @@ x-casaos:
           通常，还需要 ssh 到您想要采用的设备并手动设置通知 IP 地址，所需的命令是“set-inform http://HOST-ADDRESS:8080/inform”。
 
           了解更多[信息](https://docs.linuxserver.io/images/docker-unifi-network-application/)
-  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-network-application/icon.png
   screenshot_link: 
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-network-application/screenshot-1.png
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-network-application/screenshot-1.png
